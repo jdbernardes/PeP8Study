@@ -1,5 +1,7 @@
 from fila_base import FilaBase
 
+from constants import CODIGO_PRIORITARIO
+
 
 class FilaPrioritaria(FilaBase):
     codigo: int = 0
@@ -8,7 +10,7 @@ class FilaPrioritaria(FilaBase):
     senha_atual: str = ""
 
     def gera_senha_atual(self) -> None:
-        self.senha_atual = f'PR{self.codigo}'
+        self.senha_atual = f'${CODIGO_PRIORITARIO}{self.codigo}'
 
     def chama_cliente(self, caixa: int) -> str:
         cliente_atual = self.fila.pop()

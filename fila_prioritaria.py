@@ -1,8 +1,11 @@
 from typing import Dict, List, Union
 
-
 from fila_base import FilaBase
 from constants import CODIGO_PRIORITARIO
+from estatistica_resumida import EstatisticaResumida
+from estatistica_detalhada import EstatisticaDetalhada
+
+Classes = Union[EstatisticaDetalhada, EstatisticaResumida]
 
 
 class FilaPrioritaria(FilaBase):
@@ -15,7 +18,5 @@ class FilaPrioritaria(FilaBase):
         self.clientes_atendidos.append(cliente_atual)
         return (f'Cliente Atual: {cliente_atual}, dirija-se ao caixa {caixa}')
 
-    def estatistica(self, dia: str, agencia: int, retorna_estatistica) -> dict:
-        estatistica = retorna_estatistica(dia, agencia)
-
-        return estatistica.roda_estatistica(self.clientes_atendidos)
+    def estatistica(self, retorna_estatistica: Classes) -> dict:
+        return retorna_estatistica.roda_estatistica(self.clientes_atendidos)
